@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    const uri = process.env.MONGODB_URI;
+    const uri = 'mongodb+srv://hostelhub_admin:hcEwICNDZ2FZSTyY@hostelhub-cluster.w7uoawk.mongodb.net/?appName=hostelhub-cluster';
     if (!uri) throw new Error('MONGODB_URI not defined');
     const conn = await mongoose.connect(uri);
     console.log(`✅ MongoDB connected: ${conn.connection.host}`);

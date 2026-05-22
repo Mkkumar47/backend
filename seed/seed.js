@@ -4,7 +4,7 @@ const User = require('../models/User');
 const Room = require('../models/Room');
 
 const seed = async () => {
-  await mongoose.connect(process.env.MONGODB_URI);
+  await mongoose.connect('mongodb+srv://hostelhub_admin:hcEwICNDZ2FZSTyY@hostelhub-cluster.w7uoawk.mongodb.net/?appName=hostelhub-cluster');
   console.log('Connected. Seeding...');
 
   await User.deleteMany({});
