@@ -72,11 +72,20 @@ exports.forgotPassword = asyncHandler(async (req, res) => {
 
 // POST /api/auth/reset-password/:token
 exports.resetPassword = asyncHandler(async (req, res) => {
-  const hashed = crypto.createHash('sha256').update(req.params.token).digest('hex');
-  const user = await User.findOne({ passwordResetToken: hashed, passwordResetExpire: { $gt: Date.now() } });
+  const token = req.params.token;
+  if (!token) throw new ApiError(400, 'Token required');
+  
+  const hashed = crypto.createHash('sha256').update(token).digest('hex');
+  const user = await User.findOne({ 
+    passwordResetToken: hashed, 
+    passwordResetExpire: { $gt: new Date() } 
+  });
+  
   if (!user) throw new ApiError(400, 'Invalid or expired token');
+  
   const { password } = req.body;
   if (!password) throw new ApiError(400, 'Password required');
+  
   user.password = password;
   user.passwordResetToken = undefined;
   user.passwordResetExpire = undefined;
@@ -86,9 +95,17 @@ exports.resetPassword = asyncHandler(async (req, res) => {
 
 // GET /api/auth/verify-email/:token
 exports.verifyEmail = asyncHandler(async (req, res) => {
-  const hashed = crypto.createHash('sha256').update(req.params.token).digest('hex');
-  const user = await User.findOne({ emailVerifyToken: hashed, emailVerifyExpire: { $gt: Date.now() } });
+  const token = req.params.token;
+  if (!token) throw new ApiError(400, 'Token required');
+  
+  const hashed = crypto.createHash('sha256').update(token).digest('hex');
+  const user = await User.findOne({ 
+    emailVerifyToken: hashed, 
+    emailVerifyExpire: { $gt: new Date() } 
+  });
+  
   if (!user) throw new ApiError(400, 'Invalid or expired token');
+  
   user.isVerified = true;
   user.emailVerifyToken = undefined;
   user.emailVerifyExpire = undefined;

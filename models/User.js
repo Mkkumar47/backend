@@ -61,14 +61,14 @@ userSchema.methods.matchPassword = function (entered) {
 userSchema.methods.getResetToken = function () {
   const token = crypto.randomBytes(32).toString('hex');
   this.passwordResetToken = crypto.createHash('sha256').update(token).digest('hex');
-  this.passwordResetExpire = Date.now() + 15 * 60 * 1000; // 15 min
+  this.passwordResetExpire = new Date(Date.now() + 15 * 60 * 1000); // 15 min
   return token;
 };
 
 userSchema.methods.getEmailVerifyToken = function () {
   const token = crypto.randomBytes(32).toString('hex');
   this.emailVerifyToken = crypto.createHash('sha256').update(token).digest('hex');
-  this.emailVerifyExpire = Date.now() + 24 * 60 * 60 * 1000;
+  this.emailVerifyExpire = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
   return token;
 };
 
