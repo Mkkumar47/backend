@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($src = \"c:\\\\Users\\\\ManikantaRedrouthu\\\\Downloads\\\\hostelhub\\\\hostelhub\\\\backend\\\\.env.example\"; $dst = \"c:\\\\Users\\\\ManikantaRedrouthu\\\\Downloads\\\\hostelhub\\\\hostelhub\\\\backend\\\\.env\"; if \\(-not \\(Test-Path $dst\\)\\) { Copy-Item $src $dst; Write-Output \"Copied\" } else { Write-Output \"Already exists\" })",
+      "Read(//c/Program Files/**)"
+    ]
+  }
+}
