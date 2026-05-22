@@ -35,12 +35,8 @@ app.use(hpp());
 app.use(compression());
 
 // CORS
-const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173').split(',');
 app.use(cors({
-  origin: (origin, cb) => {
-    if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
-    return cb(new Error('Not allowed by CORS'));
-  },
+  origin: true,
   credentials: true
 }));
 
