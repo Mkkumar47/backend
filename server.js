@@ -20,7 +20,8 @@ const paymentRoutes = require('./routes/payments');
 const uploadRoutes = require('./routes/uploads');
 const adminRoutes = require('./routes/admin');
 const reviewRoutes = require('./routes/reviews');
-
+const dns = require('node:dns');
+dns.setServers(['8.8.8.8', '1.1.1.1']);
 const app = express();
 
 // DB
